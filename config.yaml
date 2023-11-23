@@ -1,0 +1,10 @@
+student_email: kamushkin-9797@yandex.ru
+postgres_cluster:
+  hosts:
+  - address: 10.5.0.15
+    port: 5432
+  user: postgres
+  password: ihateourcontractor
+  db_name: bingodb
+  ssl_mode: disable
+  use_closest_node: false
