@@ -22,7 +22,6 @@ services:
       timeout: 10s
       retries: 1
       start_period: 30s
-      start_interval: 5s
   bingo-2:
     container_name: des-bingo
     image: "detree05/bingo:latest"
@@ -36,4 +35,3 @@ services:
       timeout: 10s
       retries: 1
       start_period: 30s
-      start_interval: 5s
