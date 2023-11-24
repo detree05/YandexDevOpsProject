@@ -13,7 +13,7 @@ services:
     image: "detree05/bingo:latest"
     restart: always
     ports:
-      - "7962:8080"
+      - "8080:7962"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://10.5.0.10/ping"]
       interval: 15s
@@ -25,7 +25,7 @@ services:
     image: "detree05/bingo:latest"
     restart: always
     ports:
-      - "7962:8081"
+      - "8081:7962"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://10.5.0.10/ping"]
       interval: 15s
