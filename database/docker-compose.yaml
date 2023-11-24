@@ -4,7 +4,6 @@ services:
     container_name: bingo-db
     image: "detree05/postgres:latest"
     restart: always
-    network_mode: "host"
     ports:
       - "5432:5432"
     volumes:
