@@ -1,0 +1,39 @@
+version: '3.7'
+services:
+  nginx:
+    container_name: nginx
+    image: "detree05/binginx:latest"
+    restart: always
+    network_mode: "host"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8443:8443"
+  bingo-1:
+    container_name: uno-bingo
+    image: "detree05/bingo:latest"
+    restart: always
+    network_mode: "host"
+    ports:
+      - "7962:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://10.5.0.10/ping"]
+      interval: 15s
+      timeout: 10s
+      retries: 1
+      start_period: 30s
+      start_interval: 5s
+  bingo-2:
+    container_name: des-bingo
+    image: "detree05/bingo:latest"
+    restart: always
+    network_mode: "host"
+    ports:
+      - "7962:8081"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://10.5.0.10/ping"]
+      interval: 15s
+      timeout: 10s
+      retries: 1
+      start_period: 30s
+      start_interval: 5s

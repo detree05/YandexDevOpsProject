@@ -1,0 +1,39 @@
+#cloud-config
+
+users:
+  - name: ubuntu
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin, docker
+    home: /home/ubuntu
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC0PcITMYsxj6fTcBkhw60up/eiMQp4grr3XPaL68bDhcvrDVJKqVfigl6uwrqYwzcTWLr9CF39AZn04oXSdqz1SWxwJ/+Gm4ahwflXj7kR/rUPTgMUcVFlVEVvJ7nl7ynxghBWLgiAKIlTH1Uahvwq0+2QLfJUFHqYsWYls/pCI0YsblvQakG7AVeJLevVsypLO6I9bMa0H3ULSWt9XX5TSXb3hwb1q42bntkd96yZXdR9a3abBq/6BToUkQ7GHKtIrHIvNxObASKf9wv4DAYETWDFmWjQXkjVS94hLam3EalkMqGPqT4sBMhqoWgBlFbtKqWmK5jc2CAUYcY+B3IQ3jLOKTPJc33GbJagXsp90vdB0BsuGjCj/PV28a227+P0Trp8vSsVRbJiUFBb+HIUhozO0V6K2qgQ93hiiBFN5DYAKJQZsX3wcELEiYK/9aop6dYETqeSCmJaoF3BNeK9rVgQtf1d432EAW+xps9jQRgUqz3Wq30VefE83PhsymU= detre@nevernode
+
+ssh_pwauth: false
+disable_root: false
+chpasswd:
+  list: |
+    ubuntu:ubuntu
+  expire: false
+
+apt:
+  sources:
+    docker.list:
+      source: deb [arch=amd64] https://download.docker.com/linux/ubuntu $RELEASE stable
+      keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+
+package_update: true
+package_upgrade: true
+packages:
+  - qemu-guest-agent
+  - docker-ce
+  - docker-ce-cli
+  - docker-compose
+
+# runcmd:
+  # - [ sh, -c, 'sudo mkdir /run/binfolder' ]
+  # - [ sh, -c, 'sudo mkdir /opt/bingo' ]
+  # - [ sh, -c, 'sudo wget "https://github.com/detree05/my-little-project/raw/main/bingo" -O /run/binfolder/bingo' ]
+  # - [ sh, -c, 'sudo wget "https://github.com/detree05/my-little-project/raw/main/config.yaml" -O /opt/bingo/config.yaml' ]
+  # - [ sh, -c, 'sudo ln -s /run/binfolder/bingo /bin ']
+  # - [ sh, -c, 'bingo prepare_db' ]
