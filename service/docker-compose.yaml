@@ -23,6 +23,7 @@ services:
       interval: 1s
       timeout: 2s
       retries: 1
+      start_period: 3s
     deploy:
       resources:
         limits:
@@ -38,6 +39,7 @@ services:
       interval: 1s
       timeout: 2s
       retries: 1
+      start_period: 3s
     deploy:
       resources:
         limits:
