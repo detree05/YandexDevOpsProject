@@ -8,9 +8,10 @@ services:
       - "80:80"
       - "443:443"
       - "8443:8443"
-    resources:
-      limits:
-        memory: 512M
+    deploy:
+      resources:
+        limits:
+          memory: 512M
   bingo-1:
     container_name: uno-bingo
     image: "detree05/bingo:latest"
@@ -22,9 +23,10 @@ services:
       interval: 15s
       timeout: 10s
       retries: 1
-    resources:
-      limits:
-        memory: 1G
+    deploy:
+      resources:
+        limits:
+          memory: 1G
   bingo-2:
     container_name: des-bingo
     image: "detree05/bingo:latest"
@@ -36,6 +38,7 @@ services:
       interval: 15s
       timeout: 10s
       retries: 1
-    resources:
-      limits:
-        memory: 1G
+    deploy:
+      resources:
+        limits:
+          memory: 1G
