@@ -23,7 +23,7 @@ services:
         limits:
           memory: 1G
     healthcheck:
-       test: ["CMD-SHELL", "check=$( curl localhost:7962/ping ); if [ "$check" = "pong" ]; then exit 0; else exit 1; fi"]
+       test: ["CMD-SHELL", "check=$( curl localhost:7962/ping ); if [ '$check' = 'pong' ]; then exit 0; else exit 1; fi"]
        interval: 2s
        timeout: 1s
        retries: 1
@@ -39,7 +39,7 @@ services:
         limits:
           memory: 1G
     healthcheck:
-       test: ["CMD-SHELL", "check=$( curl localhost:7962/ping ); if [ "$check" = "pong" ]; then exit 0; else exit 1; fi"]
+       test: ["CMD-SHELL", "check=$( curl localhost:7962/ping ); if [ '$check' = 'pong' ]; then exit 0; else exit 1; fi"]
        interval: 2s
        timeout: 1s
        retries: 1
