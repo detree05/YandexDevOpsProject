@@ -18,12 +18,6 @@ services:
     restart: always
     ports:
       - "8080:7962"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:7962/ping"]
-      interval: 1s
-      timeout: 2s
-      retries: 1
-      start_period: 3s
     deploy:
       resources:
         limits:
@@ -34,12 +28,6 @@ services:
     restart: always
     ports:
       - "8081:7962"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:7962/ping"]
-      interval: 1s
-      timeout: 2s
-      retries: 1
-      start_period: 3s
     deploy:
       resources:
         limits:
