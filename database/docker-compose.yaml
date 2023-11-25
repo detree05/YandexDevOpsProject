@@ -14,8 +14,9 @@ services:
       timeout: 5s
       retries: 3
       start_period: 30s
-    resources:
-      limits:
-        memory: 2G
+    deploy:
+      resources:
+        limits:
+          memory: 2G
 volumes:
   data:
