@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   nginx:
-    container_name: nginx
+    container_name: binginx
     image: "detree05/binginx:latest"
     restart: always
     ports:
