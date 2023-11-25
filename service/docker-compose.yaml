@@ -19,9 +19,9 @@ services:
     ports:
       - "8080:7962"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://10.5.0.10/ping"]
-      interval: 15s
-      timeout: 10s
+      test: ["CMD", "curl", "-f", "http://localhost/ping"]
+      interval: 1s
+      timeout: 2s
       retries: 1
     deploy:
       resources:
@@ -34,9 +34,9 @@ services:
     ports:
       - "8081:7962"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://10.5.0.10/ping"]
-      interval: 15s
-      timeout: 10s
+      test: ["CMD", "curl", "-f", "http://localhost/ping"]
+      interval: 1s
+      timeout: 2s
       retries: 1
     deploy:
       resources:
