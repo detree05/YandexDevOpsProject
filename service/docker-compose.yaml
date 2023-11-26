@@ -23,9 +23,9 @@ services:
         limits:
           memory: 1G
     healthcheck:
-       test: ["CMD-SHELL", "curl localhost:7962/ping | grep 'pong'" ]
-       interval: 2s
-       timeout: 1s
+       test: ["CMD-SHELL", "curl localhost:7962/ping | grep pong" ]
+       interval: 1s
+       timeout: 3s
        retries: 1
        start_period: 5s
   bingo-2:
@@ -39,8 +39,8 @@ services:
         limits:
           memory: 1G
     healthcheck:
-       test: ["CMD-SHELL", "curl localhost:7962/ping | grep 'pong'" ]
-       interval: 2s
-       timeout: 1s
+       test: ["CMD-SHELL", "curl localhost:7962/ping | grep pong" ]
+       interval: 1s
+       timeout: 3s
        retries: 1
        start_period: 5s
