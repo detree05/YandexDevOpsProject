@@ -18,5 +18,6 @@ services:
       resources:
         limits:
           memory: 2G
+    shm_size: 1G
 volumes:
   data:
