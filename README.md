@@ -13,8 +13,9 @@
 
 ![285672564-d5d3fee6-f29f-46e6-b0f9-51ee1092a1de](https://github.com/detree05/my-little-project/assets/125824800/be4b8ec3-b0b3-442b-a7d8-b94b90cd8af1)
 
-:: Примененные технологии ::
-- Terraform
-- PostgreSQL
-- Docker
-- Docker Compose
+:: С помощью чего было реализовано решение ::
+- Terraform (автоматизация развертки)
+- Nginx (обратный прокси, балансировщик, кэш)
+- PostgreSQL (база данных)
+- Docker (контейнеризованные приложения (PostgreSQL, bingo, nginx)
+- Docker Compose (автоматизация развертки контейнеров на виртуальных машинах и их контроль)
