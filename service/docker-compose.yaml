@@ -23,7 +23,7 @@ services:
         limits:
           memory: 1G
     healthcheck:
-       test: ["CMD-SHELL", curl localhost:7962/ping | grep 'pong'" ]
+       test: ["CMD-SHELL", "curl localhost:7962/ping | grep 'pong'" ]
        interval: 2s
        timeout: 1s
        retries: 1
@@ -39,7 +39,7 @@ services:
         limits:
           memory: 1G
     healthcheck:
-       test: ["CMD-SHELL", curl localhost:7962/ping | grep 'pong'" ]
+       test: ["CMD-SHELL", "curl localhost:7962/ping | grep 'pong'" ]
        interval: 2s
        timeout: 1s
        retries: 1
