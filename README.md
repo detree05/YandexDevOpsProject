@@ -14,7 +14,7 @@
 
 :: Схема взаимодействия нод в инфрастуктуре ::
 
-![285672564-d5d3fee6-f29f-46e6-b0f9-51ee1092a1de](https://github.com/detree05/my-little-project/assets/125824800/be4b8ec3-b0b3-442b-a7d8-b94b90cd8af1)
+![MyLittlePlan](https://github.com/detree05/my-little-project/assets/125824800/adf4329a-8195-4557-bbde-1e8cab55082f)
 
 :: С помощью чего было реализовано решение ::
 
