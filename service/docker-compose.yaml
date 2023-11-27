@@ -1,0 +1,46 @@
+version: '3.7'
+services:
+  nginx:
+    container_name: binginx
+    image: "detree05/binginx:latest"
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8443:8443"
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+  bingo-1:
+    container_name: uno-bingo
+    image: "detree05/bingo:latest"
+    restart: always
+    ports:
+      - "8080:7962"
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    healthcheck:
+       test: ["CMD-SHELL", "curl localhost:7962/ping | grep pong || kill 1" ]
+       interval: 1s
+       timeout: 3s
+       retries: 1
+       start_period: 5s
+  bingo-2:
+    container_name: des-bingo
+    image: "detree05/bingo:latest"
+    restart: always
+    ports:
+      - "8081:7962"
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    healthcheck:
+       test: ["CMD-SHELL", "curl localhost:7962/ping | grep pong || kill 1" ]
+       interval: 1s
+       timeout: 3s
+       retries: 1
+       start_period: 5s
