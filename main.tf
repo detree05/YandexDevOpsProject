@@ -31,6 +31,26 @@ resource "yandex_vpc_subnet" "bingo-subnet" {
   v4_cidr_blocks = ["10.5.0.0/24"]
 }
 
+resource "yandex_dns_zone" "dns-zone" {
+  name        = "bingo-dns-zone"
+  description = "BINGO DNS Public Zone"
+
+  labels = {
+    label1 = "bingo-public"
+  }
+
+  zone    = "neverservers.ru."
+  public  = true
+}
+
+resource "yandex_dns_recordset" "dns-rs" {
+  zone_id = yandex_dns_zone.dns-zone.id
+  name    = "bingo.neverservers.ru."
+  type    = "A"
+  ttl     = 200
+  data    = ["${yandex_compute_instance.bingo-service.network_interface.0.nat_ip_address}"]
+}
+
 resource "yandex_iam_service_account" "service-accounts" {
   for_each = local.service-accounts
   name     = each.key
