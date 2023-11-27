@@ -6,8 +6,6 @@ users:
     groups: users, admin, docker
     home: /home/ubuntu
     shell: /bin/bash
-    ssh_authorized_keys:
-      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC0PcITMYsxj6fTcBkhw60up/eiMQp4grr3XPaL68bDhcvrDVJKqVfigl6uwrqYwzcTWLr9CF39AZn04oXSdqz1SWxwJ/+Gm4ahwflXj7kR/rUPTgMUcVFlVEVvJ7nl7ynxghBWLgiAKIlTH1Uahvwq0+2QLfJUFHqYsWYls/pCI0YsblvQakG7AVeJLevVsypLO6I9bMa0H3ULSWt9XX5TSXb3hwb1q42bntkd96yZXdR9a3abBq/6BToUkQ7GHKtIrHIvNxObASKf9wv4DAYETWDFmWjQXkjVS94hLam3EalkMqGPqT4sBMhqoWgBlFbtKqWmK5jc2CAUYcY+B3IQ3jLOKTPJc33GbJagXsp90vdB0BsuGjCj/PV28a227+P0Trp8vSsVRbJiUFBb+HIUhozO0V6K2qgQ93hiiBFN5DYAKJQZsX3wcELEiYK/9aop6dYETqeSCmJaoF3BNeK9rVgQtf1d432EAW+xps9jQRgUqz3Wq30VefE83PhsymU= detre@nevernode
 
 ssh_pwauth: false
 disable_root: false
@@ -29,9 +27,58 @@ packages:
   - docker-ce-cli
   - docker-compose
   - iptables-persistent
+  
+write_files:
+   - path: /home/ubuntu/docker-compose.yaml
+     content: |
+       version: '3.7'
+       services:
+         nginx:
+           container_name: binginx
+           image: "detree05/binginx:latest"
+           restart: always
+           ports:
+             - "80:80"
+             - "443:443"
+             - "8443:8443"
+           deploy:
+             resources:
+               limits:
+                 memory: 512M
+         bingo-1:
+           container_name: uno-bingo
+           image: "detree05/bingo:latest"
+           restart: always
+           ports:
+             - "8080:7962"
+           deploy:
+             resources:
+               limits:
+                 memory: 1G
+           healthcheck:
+             test: ["CMD-SHELL", "curl localhost:7962/ping | grep pong || kill 1" ]
+             interval: 1s
+             timeout: 3s
+             retries: 1
+             start_period: 5s
+         bingo-2:
+           container_name: des-bingo
+           image: "detree05/bingo:latest"
+           restart: always
+           ports:
+             - "8081:7962"
+           deploy:
+             resources:
+               limits:
+                 memory: 1G
+           healthcheck:
+             test: ["CMD-SHELL", "curl localhost:7962/ping | grep pong || kill 1" ]
+             interval: 1s
+             timeout: 3s
+             retries: 1
+             start_period: 5s
 
 runcmd:
-  - [ sh, -c, 'sudo mkdir /home/ubuntu/docker && sudo wget "https://github.com/detree05/my-little-project/raw/main/service/docker-compose.yaml" -O /home/ubuntu/docker/docker-compose.yaml' ]
   - [ sh, -c, 'sudo iptables -t nat -A PREROUTING -p tcp -d 8.8.8.8 --dport 80 -j DNAT --to-destination 8.8.8.8:53' ]
   - [ sh, -c, 'sudo iptables-save > /etc/iptables/rules.v4' ]
-  - [ sh, -c, 'cd /home/ubuntu/docker && sudo docker-compose up' ]
+  - [ sh, -c, 'cd /home/ubuntu && sudo docker-compose up' ]

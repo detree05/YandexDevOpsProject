@@ -31,8 +31,8 @@ resource "yandex_vpc_subnet" "bingo-subnet" {
   v4_cidr_blocks = ["10.5.0.0/24"]
 }
 
-resource "yandex_dns_zone" "dns-zone" {
-  name        = "bingo-dns-zone"
+resource "yandex_dns_zone" "outer-dns-zone" {
+  name        = "bingo-outer-dns-zone"
   description = "BINGO DNS Public Zone"
 
   labels = {
@@ -43,12 +43,33 @@ resource "yandex_dns_zone" "dns-zone" {
   public  = true
 }
 
-resource "yandex_dns_recordset" "dns-rs" {
-  zone_id = yandex_dns_zone.dns-zone.id
+resource "yandex_dns_zone" "inner-dns-zone" {
+  name        = "bingo-inner-dns-zone"
+  description = "BINGO DNS Private Zone"
+
+  labels = {
+    label1 = "bingo-private"
+  }
+
+  zone             = "bingo.ru."
+  public           = false
+  private_networks = [yandex_vpc_network.bingo-network.id]
+}
+
+resource "yandex_dns_recordset" "bingo-service-rs" {
+  zone_id = yandex_dns_zone.outer-dns-zone.id
   name    = "bingo.neverservers.ru."
   type    = "A"
   ttl     = 200
   data    = ["${yandex_compute_instance.bingo-service.network_interface.0.nat_ip_address}"]
+}
+
+resource "yandex_dns_recordset" "bingo-database-rs" {
+  zone_id = yandex_dns_zone.inner-dns-zone.id
+  name    = "db.bingo.ru."
+  type    = "A"
+  ttl     = 200
+  data    = ["${yandex_compute_instance.bingo-db.network_interface.0.ip_address}"]
 }
 
 resource "yandex_iam_service_account" "service-accounts" {
@@ -80,7 +101,6 @@ resource "yandex_compute_instance" "bingo-db" {
   }
   network_interface {
     subnet_id = "${yandex_vpc_subnet.bingo-subnet.id}"
-    ip_address = "10.5.0.15"
 	nat = true
   }
   boot_disk {
@@ -109,7 +129,6 @@ resource "yandex_compute_instance" "bingo-service" {
   }
   network_interface {
     subnet_id = "${yandex_vpc_subnet.bingo-subnet.id}"
-    ip_address = "10.5.0.10"
     nat = true
   }
   boot_disk {
