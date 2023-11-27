@@ -7,7 +7,6 @@ users:
     home: /home/ubuntu
     shell: /bin/bash
 
-ssh_pwauth: false
 disable_root: false
 chpasswd:
   list: |
