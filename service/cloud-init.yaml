@@ -82,6 +82,8 @@ write_files:
              timeout: 3s
              retries: 1
              start_period: 5s
+       networks:
+         innertalk:
 
 runcmd:
   - [ sh, -c, 'sudo iptables -t nat -A PREROUTING -p tcp -d 8.8.8.8 --dport 80 -j DNAT --to-destination 8.8.8.8:53' ]
