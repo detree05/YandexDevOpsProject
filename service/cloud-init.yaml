@@ -40,6 +40,8 @@ write_files:
              - "80:80"
              - "443:443"
              - "8443:8443"
+           networks:
+             - innertalk
            deploy:
              resources:
                limits:
@@ -48,8 +50,10 @@ write_files:
            container_name: uno-bingo
            image: "detree05/bingo:latest"
            restart: always
-           ports:
-             - "8080:7962"
+           expose:
+             - "8080"
+           networks:
+             - innertalk
            deploy:
              resources:
                limits:
@@ -64,8 +68,10 @@ write_files:
            container_name: des-bingo
            image: "detree05/bingo:latest"
            restart: always
-           ports:
-             - "8081:7962"
+           expose:
+             - "8081"
+           networks:
+             - innertalk
            deploy:
              resources:
                limits:
