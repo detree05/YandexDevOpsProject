@@ -14,7 +14,7 @@
 
 :: Наглядная схема инфраструктуры ::
 
-![BINGO Cluster](https://github.com/detree05/my-little-project/assets/125824800/353e038d-8ed1-41e6-89bb-e64d13c0959a)
+![BINGO Cluster](https://github.com/detree05/my-little-project/assets/125824800/6b9150d5-3e3d-4640-bae5-dac1c943a3f0)
 
 :: С помощью чего было реализовано решение ::
 
